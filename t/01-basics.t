@@ -14,7 +14,15 @@ use String::JS qw(
 
 subtest encode_js_string => sub {
     is(encode_js_string(""), q(""));
-    is(encode_js_string("a\n"), q("a\n"));
+    is(encode_js_string("a'\"\n"), q("a'\\"\n"));
+
+    is(encode_js_string("", 1), q(''));
+    is(encode_js_string("a'\"\n", 1), q('a\\'"\n'));
+
+    is(encode_js_string("", 2), q(''));
+    is(encode_js_string("a'\"\n", 2), q('a\\\\'\\\"\\\\n'));
+
+    dies_ok { encode_js_string('', 3) };
 };
 
 subtest decode_js_string => sub {
