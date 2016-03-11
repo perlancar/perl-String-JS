@@ -7,8 +7,8 @@ use 5.010001;
 use strict;
 use warnings;
 
-use JSON;
-my $json = JSON->new->allow_nonref;
+use JSON::MaybeXS;
+my $json = JSON::MaybeXS->new->allow_nonref;
 
 use Exporter;
 our @ISA = qw(Exporter);
@@ -95,10 +95,5 @@ Currently does not support JavaScript string representation that uses single
 quotes (C<'>).
 
 Will die on failure.
-
-
-=head1 SEE ALSO
-
-L<JSON>
 
 =cut
